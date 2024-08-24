@@ -56,7 +56,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="/">
-                            <img src="/web/images/logo.png" alt="goru"/> <!--style="height: 30px; margin-top: 20px"-->
+                            <img src="/web/images/drhs.png" alt="goru" style="width: 200px;height: 40px"/> <!--style="height: 30px; margin-top: 20px"-->
                         </a>
                     </div>
                 </div>
@@ -75,6 +75,19 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                             <li class="menu-item-has-children">
                                 <a href="/web/site/shop">Книги</a>
                             </li>
+                            <li class="menu-item-has-children">
+                                <a href="/web/site/blog">Статьи</a>
+                            </li>
+
+
+                            <?php
+                            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->role == "Администратор")
+                                echo '
+                                <li class="menu-item-has-children">
+                                <a href="/web/admin">Административная панель</a>
+                            </li>
+                                ';
+                            ?>
                             <!--<li class="menu-item-has-children">
                                 <a href="/web/site/login">Авторизаци/Регистрация</a>
                             </li>-->
@@ -108,7 +121,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                         }
 
                         ?>
-                        <div>
+                        <div style="margin-bottom:30px; margin-left: 7px">
                         <a class="carts"
                            href="/web/carts"><span><?php if (!empty($carts)): ?> <?= $carts['over_count']; ?>   <?php else: ?>
                                     0
@@ -146,7 +159,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             <a href="javascript:void(0);" class="search-closer">x</a><!-- Close Popup Btn -->
             <div class="middle-search">
                 <div class="popup-search-form"><!-- Search Form Start -->
-                    <form method="get" action="/web/site/shop_search">
+                    <form method="get" action="/web/site/shop">
                         <input type="Search" name="keyword" id="keyword" placeholder="Search...">
                         <button type="submit"><i class="twi-search"></i></button>
                     </form><!-- Search Form End -->
@@ -154,9 +167,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             </div>
         </div>
     </section>
-    <br>
-    <br>
-    <br>
+
 
     <!-- Popup Search -->
     <?= $content ?>
@@ -226,7 +237,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 
                 </div>
                 <div class="col-lg-6 col-md-7">
-                    <div class="copys-text"><i class="twi-copyright"></i>Copyright goodbook 2022 | All Rights Reserved
+                    <div class="copys-text"><i class="twi-copyright"></i>Copyright goodbook 2023 | All Rights Reserved
                     </div>
                 </div>
             </div>

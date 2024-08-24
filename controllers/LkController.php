@@ -64,7 +64,7 @@ class LkController extends Controller
      */
     public function actionIndex()
     {
-        $orders = Orders::find()->where(['id_user'=>Yii::$app->user->identity->id])->all();
+        $orders = Orders::find()->where(['id_user'=>Yii::$app->user->identity->id])->orderBy('id DESC')->all();
         return $this->render('index',['orders'=>$orders]);
 
         /*$searchModel = new ProblemSearch();

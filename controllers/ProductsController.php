@@ -72,22 +72,43 @@ class ProductsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Products();
+        $model = new ProductCreateForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) ) {
+                $model->image = UploadedFile::getInstance($model, 'image');
+                $newFileName =  md5($model->image->baseName . '.' . $model->image->extension. time()). '.' . $model->image->extension;
+                $model->image->saveAs('images/' . $newFileName);
+                $model->image = '/images/' .$newFileName;
+
+                $model->file = UploadedFile::getInstance($model, 'file');
+                $newFileName =  md5($model->file->baseName . '.' . $model->file->extension. time()). '.' . $model->file->extension;
+                $model->file->saveAs('file/' . $newFileName);
+                $model->file = '/file/' .$newFileName;
+
+                $model->statusDescription = 0;
+
+
+                $model->save();
+
+                //$this->generateXml($model,Yii::$app->user->identity);
+                Yii::$app->session->setFlash('success', 'Книга успешно добавлена!');
+                return $this->redirect(['/site/shop']);
+
             }
         } else {
             $model->loadDefaultValues();
         }
 
+        $categories = Category::find()->all();
+        $categories = ArrayHelper::map($categories, 'id', 'name');
         return $this->render('create', [
             'model' => $model,
+            'categories' => $categories,
         ]);
     }
 
-    public function actionCreates()
+    /*public function actionCreates()
     {
         $model = new ProductCreateForm();
 
@@ -98,6 +119,9 @@ class ProductsController extends Controller
                 $model->image->saveAs('images/' . $newFileName);
                 $model->image = '/images/' .$newFileName;
                 $model->save();
+
+                $this->generateXml($model,Yii::$app->user->identity);
+
                 return $this->redirect(['/site/shop']);
             }
         } else {
@@ -110,7 +134,7 @@ class ProductsController extends Controller
             'model' => $model,
             'categories' => $categories,
         ]);
-    }
+    }*/
 
     /**
      * Updates an existing Products model.
@@ -161,4 +185,36 @@ class ProductsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
+    private function generateXml($product, $user)
+    {
+        $__user = Yii::$app->user->identity;
+        $xml = <<<_XML
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <product>
+        <id>{$product->id}</id>
+        <name>{$product->name}</name>
+        <description>{$product->description}</description>
+        <atrikul>{$product->atribut}</atrikul>
+        <year>{$product->year}</year>
+        <author>
+            <id>{$__user->id}</id>
+            <fio>{$__user->fio}</fio>
+            <inn>{$__user->inn}</inn>
+            <kpp>{$__user->kpp}</kpp>
+            <email>{$__user->email}</email>
+            <address>{$__user->address}</address>
+        </author>
+        <pictype>{$product->image}</pictype>
+        <file>{$product->file}</file>
+        <status>{$product->status}</status>
+        <statusDescription>{$product->statusDescription}</statusDescription>
+    </product>
+</root>
+_XML;
+        file_put_contents(Yii::getAlias('@app/import/site/'.time().uniqid().'.xml'), $xml);
+    }
+
 }

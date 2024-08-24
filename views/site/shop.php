@@ -1,5 +1,6 @@
 <?php
 /** @var string $products */
+/** @var string $query_cat */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -10,6 +11,11 @@ use yii\helpers\Url;
 </br>
 <!-- Shop Section Start -->
 <section class="shop-left-sidebar">
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2">
@@ -17,12 +23,12 @@ use yii\helpers\Url;
                     <aside class="widget widget-categories">
                         <h3 class="widget-title">Жанры</h3>
                         <ul>
-                            <li><a href="#">Детектив</a><i class="twi-angle-down1"></i></li>
-                            <li><a href="#">Фатастика</a><i class="twi-angle-down1"></i></li>
-                            <li><a href="#">Триллер</a><i class="twi-angle-down1"></i></li>
-                            <li><a href="#">Мистика</a><i class="twi-angle-down1"></i></li>
-                            <li><a href="#">Боевик</a><i class="twi-angle-down1"></i></li>
-                            <li><a href="#">Лучшее</a></li>
+                            <li><a href="/web/site/shop?cat_id=1">Детектив</a><i class="twi-angle-down1"></i></li>
+                            <li><a href="/web/site/shop?cat_id=5">Фантастика</a><i class="twi-angle-down1"></i></li>
+                            <li><a href="/web/site/shop?cat_id=6">Триллер</a><i class="twi-angle-down1"></i></li>
+                            <li><a href="/web/site/shop?cat_id=7">Мистика</a><i class="twi-angle-down1"></i></li>
+                            <li><a href="/web/site/shop?cat_id=10">Боевик</a><i class="twi-angle-down1"></i></li>
+                            <li><a href="/web/site/shop?cat_id=9">Лучшее</a></li>
                         </ul>
                     </aside>
 

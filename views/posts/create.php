@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Users */
+/* @var $model app\models\Posts */
 
-$this->title = 'Пользователи';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = 'Create Posts';
+$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
@@ -14,11 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 <br>
-<div class="users-create">
+<div class="posts-create container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_form_create', [
         'model' => $model,
     ]) ?>
 

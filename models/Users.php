@@ -44,11 +44,11 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'fio' => 'Fio',
+            'fio' => 'ФИО',
             'email' => 'Email',
             'password' => 'Password',
-            'phone' => 'Phone',
-            'address' => 'Address',
+            'phone' => 'Телефон',
+            'address' => 'Адрес',
             'role' => 'Role',
         ];
     }

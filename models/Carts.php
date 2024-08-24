@@ -84,6 +84,7 @@ class Carts extends \yii\db\ActiveRecord
             }
             $carts['products'][$product->id]['count'] = $count;
         } else { // такого товара еще нет
+            $carts['products'][$product->id]['id'] = $product->id;
             $carts['products'][$product->id]['name'] = $product->name;
             $carts['products'][$product->id]['price'] = $product->price;
             $carts['products'][$product->id]['image'] = $product->image;

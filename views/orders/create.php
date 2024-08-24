@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Users */
+/* @var $model app\models\Orders */
 
-$this->title = 'Пользователи';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = 'Create Orders';
+$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 <br>
-<div class="users-create">
+<div class="orders-create container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

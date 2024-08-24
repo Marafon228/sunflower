@@ -9,7 +9,12 @@ use yii\helpers\Url;
 
 ?>
 <!-- Slider Start -->
-<section class="slider-01">
+<section class="slider-01 ">
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
     <div class="rev_slider_wrapper">
         <div id="rev_slider_1" class="rev_slider fullwidthabanner" style="    lodisplay:none;" data-version="5.4.1">
             <ul>
@@ -1867,7 +1872,7 @@ use yii\helpers\Url;
         <div class="row">
             <div class="col-lg-6 col-md-5">
                 <div class="dis-product-detail">
-                    <h4>Бестселлеры 2022 года
+                    <h4>Бестселлеры 2023 года
                     </h4>
                     <h4> Джей Кристофф «Империя вампиров»
                     </h4>
@@ -1876,7 +1881,7 @@ use yii\helpers\Url;
                                     <span><span class="woocommerce-Price-currencySymbol"></span>₽680</span>
                                 </span>
                     </div>
-                    <div id="countdown-coupone" class="clearfix" data-day="27" data-month="12" data-year="2022"></div>
+                    <div id="countdown-coupone" class="clearfix" data-day="27" data-month="09" data-year="2023"></div>
                     <form method="post"
                           action="<?= Url::to(['carts/add']); ?>">
                         <input type="hidden" name="id"

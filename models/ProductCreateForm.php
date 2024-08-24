@@ -17,18 +17,36 @@ namespace app\models;
 class ProductCreateForm extends Products
 {
 
+    public $count;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['name', 'description', 'image', 'id_category','price'], 'required'],
+            [['name', 'description', 'image', 'id_category','price','year','file', 'count'], 'required'],
             [['description'], 'string'],
             [['id_category'], 'integer'],
-            ['image', 'file','extensions'=> 'png, jpg, jpeg, bmp', 'maxSize' => 10*1024*1024, 'message' => 'Большой файл'],
+            ['image', 'file','extensions'=> 'png, jpg, jpeg, bmp', 'maxSize' => 100*1024*1024, 'message' => 'Большой файл'],
+            ['file', 'file','extensions'=> 'pdf', 'maxSize' => 100*1024*1024, 'message' => 'Большой файл'],
             [['name', 'image','price'], 'string', 'max' => 255],
             [['id_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['id_category' => 'id']],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Название',
+            'description' => 'Описание',
+            'image' => 'Фото',
+            'price' => 'Цена',
+            'file' => 'Файл',
+            'year' => 'Возрастная категроия',
+            'atrikul' => 'Артикул',
+            'id_category' => 'Категория',
+            'count'=>'Количество'
         ];
     }
 

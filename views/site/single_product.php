@@ -3,6 +3,7 @@
 /** @var string $product */
 /** @var array $product_cat */
 /** @var array $comments */
+/** @var array $model */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -86,32 +87,29 @@ use yii\helpers\Url;
                             <div class="comment-area">
 
                                 <?php
-                                if (Yii::$app->user->isGuest){
-                                    echo '<p>Зарегистрируйтесь что бы оставить комментарий  </p>  ';
-                                }
-                                else {
-                                    echo '
-                                    <div class="comment-form-wrapper">
-                                    <h5>Добавить комментарий</h5>
-                                    <form action="#" method="post" class="row comment-form">
-                                        <div class="col-lg-6 col-md-6">
-                                            <input type="text" name="name" placeholder="Name">
+                                use yii\widgets\ActiveForm;
+
+                                if (Yii::$app->user->isGuest) {
+                                    echo '<p>Зарегистрируйтесь, чтобы оставить комментарий</p>';
+                                } else {
+                                    $form = ActiveForm::begin([
+                                        'action' => Url::to(['site/single_product', 'id' => $product['id']]),
+                                        //'action' => ['site/single_product'],// Replace 'your-controller-action' with the actual URL for submitting the form
+                                        'method' => 'post',
+                                        'options' => ['class' => 'row comment-form'],
+                                    ]);
+                                    ?>
+
+                                    <div class="col-lg-12 col-md-12">
+                                        <?= $form->field($model, 'description')->textarea(['placeholder' => 'Reviews']) ?>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <?= Html::submitButton('Submit Review', ['class' => 'btn btn-primary']) ?>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <input type="email" name="email" placeholder="Email">
-                                        </div>
-                                        <div class="col-lg-12 col-md-12">
-                                            <textarea name="message" placeholder="Reviews"></textarea>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12">
-                                            <input type="submit" name="submit" value="Submit Review">
-                                        </div>
-                                    </form>
-                                </div>
-                                    
-                                    ';
-                                }
-                                ?>
+                                    </div>
+                                    <?php ActiveForm::end(); ?>
+                                <?php } ?>
                                 <?php foreach ($comments as $comment): ?>
                                 <ol class="comment-list">
                                     <li>
@@ -140,7 +138,7 @@ use yii\helpers\Url;
 
                                         <div class="single-shop-product">
                                             <div class="sp-thumb">
-                                                <img src="/web<?= $product->image ?>" alt="" class="">
+                                                <img src="/web<?= $product->image ?>" alt="" href="/web/site/single_product?id=<?= $product->id ?>" class="">
 
                                             </div>
                                             <div class="sp-details">

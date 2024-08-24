@@ -3,18 +3,23 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Users */
+/* @var $model app\models\Orders */
 
-$this->title = 'Update Users: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = 'Update Orders: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="users-update container">
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="orders-update container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_forms', [
+    <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 

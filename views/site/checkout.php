@@ -1,6 +1,7 @@
 <?php
 /** @var array $baskets */
 /** @var array $model */
+/** @var array $usr */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -21,27 +22,19 @@ use yii\widgets\ActiveForm;
                             <h3>Информация о платеже</h3>
                             <div class="row">
 
-                                <p class="col-lg-6">
-                                    <label>ФИО</label>
-                                    <input placeholder="" name="first_name" type="text"
-                                           value="<?= Yii::$app->user->identity->fio ?>" disabled>
+                                <p class="col-lg-12">
+                                    <?= $form->field($usr, 'fio')->textInput(['maxlength' => true]) ?>
                                 </p>
                                 <p class="col-lg-12">
-                                    <label>Номер телефона</label>
-                                    <input placeholder="" name="company" type="text"
-                                           value="<?= Yii::$app->user->identity->phone ?>" disabled>
+                                    <?= $form->field($usr, 'phone')->textInput(['maxlength' => true]) ?>
                                 </p>
                                 <p class="col-lg-12">
-                                    <label>Адрес</label>
-                                    <input placeholder="" name="address_1" type="text"
-                                           value="<?= Yii::$app->user->identity->address ?>" disabled>
+                                    <?= $form->field($usr, 'address')->textInput(['maxlength' => true]) ?>
                                 </p>
 
 
-                                <p class="col-lg-6">
-                                    <label>Email</label>
-                                    <input placeholder="" name="billing_email" type="email"
-                                           value="<?= Yii::$app->user->identity->email ?>" disabled>
+                                <p class="col-lg-12">
+                                    <?= $form->field($usr, 'email')->textInput(['maxlength' => true]) ?>
                                 </p>
 
 
@@ -103,17 +96,15 @@ use yii\widgets\ActiveForm;
                             </table>
                             <div class="woocommerce-checkout-payment" id="payment">
                                 <ul class="wc_payment_methods payment_methods methods">
-
                                     <li class="wc_payment_method payment_method_paypal">
-                                        <input value="paypal" name="payment_method" class="input-radio"
-                                               id="payment_method_paypal" type="radio" checked>
-                                        <label for="payment_method_paypal">Оплата <i class="twi-cc-mastercard"></i><i
-                                                    class="twi-cc-visa"></i><i class="twi-cc-paypal"></i><i
-                                                    class="twi-cc-discover"></i></label>
+                                        <input value="paypal" name="payment_method" class="input-radio" id="payment_method_paypal" type="radio" checked>
+                                        <label for="payment_method_paypal">Оплата <i class="twi-cc-mastercard"></i><i class="twi-cc-visa"></i><i class="twi-cc-paypal"></i><i class="twi-cc-discover"></i></label>
                                         <div class="payment_box payment_method_paypal">
                                             <p>
                                                 Оплата банкоской картой
                                             </p>
+                                            <input type="text" name="card_number" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}" placeholder="Введите номер карты" required>
+                                            <small>Пример формата: 1234 5678 9012 3456</small>
                                         </div>
                                     </li>
                                 </ul>

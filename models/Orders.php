@@ -35,9 +35,9 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [['id_user', 'count', 'over_price'], 'required'],
-            [['id_user', 'count'], 'integer'],
+            [['id_user', 'count', 'status'], 'integer'],
             [['over_price'], 'number'],
-            [['description', 'status'], 'string'],
+            [['description'], 'string'],
             [['date'], 'safe'],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
@@ -53,7 +53,7 @@ class Orders extends \yii\db\ActiveRecord
             'id_user' => 'Id User',
             'count' => 'Count',
             'over_price' => 'Over Price',
-            'description' => 'Description',
+            'description' => 'Описание',
             'date' => 'Date',
             'status' => 'Status',
         ];

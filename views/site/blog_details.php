@@ -31,16 +31,14 @@ $this->registerCss("blog-content {
                                     <?= $blog->name ?>
                                 </h3>
                                 <p>
-                                <pre>
-
 
                                     <?php
                                     $description = explode("\n", $blog->description);
                                     foreach ($description as $line) {
-                                        echo "$line\n";
+                                        echo "<p>" . $line . "</p>";
                                     }
                                     ?>
-                                </pre>
+
                                 </p>
                             </div>
 
